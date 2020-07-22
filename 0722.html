@@ -18,10 +18,16 @@
     <h1>for</h1>
     HRタグを10回出します
     <script>
-        for (i = 1; i <= 10; i++) {
+        i = 1
+        for (; ;) {
             document.write("<hr>")
-        } 
-        
+            i++
+            if( i >10){
+                break
+            }
+            
+        }
+
     </script>
 </body>
 
