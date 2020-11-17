@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <script>
+        var HIT_BOTTOM=4
+        var HIT_LEFT=3
+        var HIT_RIGHT=2
+        var HIT_TOP=1
+        var WALL_THICKNESS = 5
+        var screenH
+        var screenW
+        var pos_Racket_x
+        var pos_Racket_y
+        var racket_h = 5
+        var racket_w = 20
+        var ballx = 500
+        var bally = 100
+        var balldx = 1
+        var balldy = -1
+        var ball_radius=5
+        var timer = null
+
+        function init() {
+            var item = document.getElementById("myCanvas")
+            screenW = item.getAttribute("width").replace("px", "") * 1
+            screenH = item.getAttribute("height").replace("px", "") * 1
+            console.log(screenH)
+            console.log(screenW)
+            pos_Racket_x = screenW / 2
+            pos_Racket_y = screenH - WALL_THICKNESS * 4
+            drawWall()
+            drawRacket()
+            drawBall()
+        }
+        function drawWall() {
+            console.log("drawWall() called.")
+            var item = document.getElementById("myCanvas")
+            // var context = item.getContext( "2d")
+            // var canvas = document.getElementById('sample');
+            if (item.getContext) {
+                var ctx = item.getContext('2d');
+                // ctx.fillRect(50,50,300,260); //  塗りつぶし長方形を描く
+                // ctx.clearRect(120,80,200,180);   //  長方形の輪郭を描く
+                // ctx.strokeRect(180,20,180,180);  //  指定された領域を消去し透明にする
+                ctx.fillRect(0, 0, 0 + WALL_THICKNESS, 0 + screenH)
+                ctx.fillRect(0, 0, 0 + screenW, 0 + WALL_THICKNESS)
+                ctx.fillRect(0, 0 + screenW - WALL_THICKNESS - 20, 100, 100)
+                ctx.strokeRect(0, 0, 600, 400)
+                ctx.fillRect(0 + screenW - WALL_THICKNESS, 0, WALL_THICKNESS, screenH)
+                // console.log(0+screenW-WALL_THICKNESS)
+                // console.log(WALL_THICKNESS)
+            }
+        }
+        function drawRacket() {
+            console.log("drawRacket() called.")
+            var item = document.getElementById("myCanvas")
+            if (item.getContext) {
+                var ctx = item.getContext('2d')
+                ctx.fillRect(pos_Racket_x, pos_Racket_y, racket_w, racket_h)
+            }
+        }
+        function doStart() {
+            var log = function () {
+                ballx=ballx+balldx
+                bally=bally+balldy
+                console.log( "ballx:"+ballx+" bally:"+bally)
+                flag = checkWall( ballx,bally)
+                switch( flag){
+                    case HIT_TOP:
+                    
+                    case HIT_BOTTOM: 
+                    
+                    case HIT_LEFT: 
+                    
+                    case HIT_RIGHT: 
+
+                }
+                clearBall()
+                drawBall()
+            }
+            timer = setInterval(log, 10)
+
+        }
+        function drawBall(){
+            var item = document.getElementById("myCanvas")
+            if ( item.getContext){
+                var ctx = item.getContext("2d")
+                
+                ctx.beginPath();
+                ctx.fillStyle="black"
+                // ctx.fillStyle="green"
+                ctx.arc(ballx,bally,ball_radius,0,Math.PI*2.0,true);
+                ctx.fill();
+            }
+        }
+        function clearBall(){
+            var item = document.getElementById("myCanvas")
+            if ( item.getContext){
+                var ctx = item.getContext("2d")
+                ctx.beginPath();
+                ctx.fillStyle="white"
+                ctx.arc(ballx-balldx,bally-balldy,ball_radius,0,Math.PI*2.0,true);
+                ctx.fill();
+            }
+        }
+        function checkWall(){
+            if ( ballx<WALL_THICKNESS || ballx > screenW-WALL_THICKNESS){
+                balldx *= ( -1 )
+            }
+            if ( bally < WALL_THICKNESS || bally > screenH-WALL_THICKNESS){
+                balldy *= (-1)
+            }
+            
+        }
+        function stopGame(){
+            if ( timer!=null){
+                clearInterval( timer)
+            }
+        }
+    </script>
+    <style>
+
+    </style>
+</head>
+
+<body onload="init()">
+    <canvas id="myCanvas" width="600px" height="400px"></canvas>
+    <div>
+        <button onclick="doStart()">start</button>
+        <button onclick="stopGame()">stopGame</button>
+    </div>
+
+</body>
+
+</html>
