@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script>
+            function makePI( MAXIteration){
+                alert( "OK")
+                var count =0
+                var innerCount = 0 
+                console.log ( "pi calculation start ...")
+                for ( var i = 0; i < MAXIteration; i ++){
+                    count++
+                    var value1 = Math.random()
+                    var value2 = Math.random()
+                    if ( value1*value1 + value2*value2 < 1.0){
+                        innerCount++
+                    }
+
+                }
+
+                alert( "count = " + count + "inner count = " + innerCount)
+                alert( "pi = " +( innerCount/count)*4)
+            }
+            function convertX( param ){
+                console.log( param)
+                return param
+            }
+            function convertY(param, CanvasHeight ){
+                console.log( CanvasHeight-param)
+                return CanvasHeight -param
+
+            }
+            function axis(){
+                var item =document.getElementById( "myCanvas")
+                var context = item.getContext("2d")
+                if (item.getContext){
+                    var margin = 5
+
+                    context.beginPath()
+                    context.moveTo( convertX(5), convertY(5,400))
+                    context.lineTo( convertX( 100), convertY(100,400))
+
+
+                    // context.beginPath()
+                    // context.moveTo( margin,margin )
+                    // context.lineTo(600-margin , margin )
+
+                    // context.moveTo( 5,5 )
+                    // context.lineTo( 5,400 - 5 )
+                    
+                    // context.moveTo( 5, 400-5 )
+                    // context.lineTo( 600-5,400-5)
+
+                    context.stroke()
+                }
+            }
+        </script>
+        <style>
+
+        </style>
+        
+    </head>
+    <body>
+        <canvas id="myCanvas" width="600px" height="400px">
+
+        </canvas>
+        <button onclick="makePI( 10000)"> make pi 100 </button>
+        <button onclick="makePI( 100000)"> make pi 100 </button>
+        <button onclick="makePI( 1000000)"> make pi 100 </button>
+        <button onclick="axis()">座標を描く</button>
+
+    </body>
+</html>
