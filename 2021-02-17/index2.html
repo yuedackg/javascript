@@ -5,37 +5,37 @@
     <meta charset="UTF-8">
     <script>
         function action() {
-            alert("ok")
-            // 2次元配列を作る　    配列名：myPoints
-            var myPoints
-            var lastPoints
-            myPoints = new Array(4)
-            lastPoints= new Array(4)
+            // alert("ok")
+            // 2次元配列を作る　    配列名：X
+            var X
+            var O
+            X = new Array(4)
+            O= new Array(4)
             for (var i = 1; i <= 3; i++) {
-                myPoints[i] = new Array(7)
-                lastPoints[i]=new Array(7)
+                X[i] = new Array(7)
+                O[i]=new Array(7)
             }
-            // 4x3の配列を作った。myPoints[1][1] からmyPoints[4][3]までつかう
+            // 4x3の配列を作った。X[1][1] からX[4][3]までつかう
             // 二次元配列の初期化
-            myPoints[1][1] = 10
-
-            myPoints[1][2] = 100
-            myPoints[1][3] = 100
-            myPoints[1][4] = 100
-            myPoints[1][5] = 100
-            myPoints[1][6] = 10
-            myPoints[2][1] = 10
-            myPoints[2][2] = 100
-            myPoints[2][3] = 100
-            myPoints[2][4] = 10
-            myPoints[2][5] = 10
-            myPoints[2][6] = 10
-            myPoints[3][1] = 1
-            myPoints[3][2] = 1
-            myPoints[3][3] = 1
-            myPoints[3][4] = 1
-            myPoints[3][5] = 1
-            myPoints[3][6] = 1
+            X[1][1] = 10
+            X[1][2] = 100
+            X[1][3] = 100
+            X[2][1] = 10
+            X[2][2] = 100
+            X[2][3] = 100
+            X[3][1] = 1
+            X[3][2] = 1
+            X[3][3] = 1
+            
+            // X[1][4] = 100
+            // X[1][5] = 100
+            // X[1][6] = 10
+            // X[2][4] = 10
+            // X[2][5] = 10
+            // X[2][6] = 10
+            // X[3][4] = 1
+            // X[3][5] = 1
+            // X[3][6] = 1
 
             // 線を引く変数の用意
             var context
@@ -49,18 +49,18 @@
                 // 一本目の線
                 context.beginPath()
                 // moveTo()関数は実際には線を引かない。筆を動かすだけ
-                // context.moveTo(myPoints[1][1], myPoints[2][1])
+                // context.moveTo(X[1][1], X[2][1])
                 // // lineTo()関数は前の座標からの線を引く
-                // context.lineTo(myPoints[1][2], myPoints[2][2])
+                // context.lineTo(X[1][2], X[2][2])
                 // // 実際に線を引くのは,stroke()関数を使用する
-                // context.moveTo(myPoints[1][3], myPoints[2][3])
-                // context.lineTo(myPoints[1][4], myPoints[2][4])
-                // context.moveTo(myPoints[1][5], myPoints[2][5])
-                // context.lineTo(myPoints[1][6], myPoints[2][6])
+                // context.moveTo(X[1][3], X[2][3])
+                // context.lineTo(X[1][4], X[2][4])
+                // context.moveTo(X[1][5], X[2][5])
+                // context.lineTo(X[1][6], X[2][6])
 
                 for (var i = 1; i <= 3; i++) {
-                    context.moveTo(myPoints[1][2 * i - 1], myPoints[2][2 * i - 1])
-                    context.lineTo(myPoints[1][2 * i], myPoints[2][2 * i])
+                    context.moveTo(X[1][2 * i - 1], X[2][2 * i - 1])
+                    context.lineTo(X[1][2 * i], X[2][2 * i])
                 }
                 // affine変換（拡大・縮小・回転を行う。）
                 // 角度は０から360度
@@ -78,15 +78,20 @@
                 }
                 //  Affine変換の行列の初期化
                 A[1][1] = Math.cos(rad)
-                A[1][2] = Math.sin(rad)
-                A[2][1] = -Math.sin(rad)
+                A[1][2] = -Math.sin(rad)
+                A[2][1] = Math.sin(rad)
                 A[2][2] = Math.cos(rad)
                 A[1][3] = A[2][3] = A[3][1] = A[3][2] = 0
                 A[3][3] = 1
 
+                for ( var i = 1; i<=3; i++){
+                    for ( var j=1; j<=3; j++){
+                        console.log( "A["+i+"]["+j+"] = " + A[i][j])
+                    }
+                }
                 // Affine変換の計算を行い、結果を求める
                 // X' = A X
-
+                
 
 
 
